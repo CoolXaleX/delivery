@@ -1,6 +1,6 @@
-package ru.sbrf.delivery.process;
+package ru.delivery.process;
 
-import ru.sbrf.delivery.dto.DeliveryTask;
+import ru.delivery.dto.DeliveryTask;
 
 abstract public class AbstractProcess {
 

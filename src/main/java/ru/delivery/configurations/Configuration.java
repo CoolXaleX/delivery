@@ -1,7 +1,7 @@
-package ru.sbrf.delivery.configurations;
+package ru.delivery.configurations;
 
 import org.springframework.context.annotation.Bean;
-import ru.sbrf.delivery.cg.RegisterTaskCgService;
+import ru.delivery.cg.RegisterTaskCgService;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {

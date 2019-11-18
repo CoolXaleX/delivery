@@ -1,11 +1,11 @@
-package ru.sbrf.delivery.controller;
+package ru.delivery.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
-import ru.sbrf.delivery.cg.RegisterTaskCgService;
-import ru.sbrf.delivery.dto.BaseResponse;
-import ru.sbrf.delivery.dto.MainEntry;
+import ru.delivery.dto.BaseResponse;
+import ru.delivery.cg.RegisterTaskCgService;
+import ru.delivery.dto.MainEntry;
 
 @ComponentScan
 @RestController
@@ -22,8 +22,8 @@ public class DeliveryController {
 
     @GetMapping("/test")
     public BaseResponse pay(@RequestBody MainEntry request) {
-
-        return registerTaskCgService.registerTask(request);
+        return null;
+//        return registerTaskCgService.registerTask(request);
     }
 
 }

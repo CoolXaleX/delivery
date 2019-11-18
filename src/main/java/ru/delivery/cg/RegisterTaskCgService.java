@@ -1,6 +1,6 @@
-package ru.sbrf.delivery.cg;
+package ru.delivery.cg;
 
-import ru.sbrf.delivery.dto.MainEntry;
+import ru.delivery.dto.MainEntry;
 
 
 public class RegisterTaskCgService {

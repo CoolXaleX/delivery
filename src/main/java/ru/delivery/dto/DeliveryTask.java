@@ -1,4 +1,4 @@
-package ru.sbrf.delivery.dto;
+package ru.delivery.dto;
 
 import java.util.List;
 
