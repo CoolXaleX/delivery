@@ -19,4 +19,6 @@ abstract public class AbstractProcess {
     public void setSent(boolean sent) {
         isSent = sent;
     }
+
+    public abstract boolean execute(DeliveryTask task);
 }

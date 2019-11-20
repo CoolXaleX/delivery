@@ -15,4 +15,9 @@ public class TfsProcess extends AbstractProcess {
         return task.getDocumentList().stream()
                 .noneMatch(doc -> isBlank(doc.getEcmFile()));
     }
+
+    @Override
+    public boolean execute(DeliveryTask task) {
+        return true;
+    }
 }

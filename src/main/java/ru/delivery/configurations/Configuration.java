@@ -1,13 +1,13 @@
 package ru.delivery.configurations;
 
 import org.springframework.context.annotation.Bean;
-import ru.delivery.cg.RegisterTaskCgService;
+import ru.delivery.process.ProcessModel;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
 
     @Bean
-    public RegisterTaskCgService getTask(){
-        return new RegisterTaskCgService();
+    public ProcessModel getProcessModel(){
+        return new ProcessModel();
     }
 }

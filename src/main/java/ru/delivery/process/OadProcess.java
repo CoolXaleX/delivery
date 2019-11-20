@@ -15,4 +15,9 @@ public class OadProcess extends AbstractProcess {
         return task.getDocumentList().stream()
                 .noneMatch(doc -> isBlank(doc.getOadSent()));
     }
+
+    @Override
+    public boolean execute(DeliveryTask task) {
+        return true;
+    }
 }

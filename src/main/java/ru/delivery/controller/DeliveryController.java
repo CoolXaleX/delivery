@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 import ru.delivery.dto.BaseResponse;
-import ru.delivery.cg.RegisterTaskCgService;
 import ru.delivery.dto.MainEntry;
 
 @ComponentScan
 @RestController
 @RequestMapping("/send")
 public class DeliveryController {
-
-    @Autowired
-    private RegisterTaskCgService registerTaskCgService;
 
     @GetMapping
     public BaseResponse showStatus() {
