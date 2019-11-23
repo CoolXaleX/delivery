@@ -55,6 +55,7 @@ public class ProcessModel {
     private AbstractProcess getClass(String className, DeliveryTask task) {
         try {
             // TODO нужно вынести в конвертер
+            // TODO наверное надо брать класс из класс лоадера, а не создавать его, т.к. это будут бины
             return (AbstractProcess)Class.forName(PACKAGE + className)
                     .getConstructor(DeliveryTask.class)
                     .newInstance(task);
