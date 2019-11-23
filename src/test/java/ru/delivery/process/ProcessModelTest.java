@@ -21,9 +21,9 @@ public class ProcessModelTest {
         DeliveryDocument doc = new DeliveryDocument();
         doc.setEcmFolder("someFolder");
         deliveryTask.setDocumentList(asList(new DeliveryDocument(), doc));
-        List<AbstractProcess> processes = instance.getProcessList(deliveryTask);
-        Assert.assertTrue(processes.get(0) instanceof EcmProcess);
-        Assert.assertTrue(processes.get(1) instanceof TfsProcess);
+        List<ProcessDto> processes = instance.getProcessList(deliveryTask);
+        Assert.assertTrue(processes.get(0).getProcess() instanceof EcmProcess);
+        Assert.assertTrue(processes.get(1).getProcess() instanceof TfsProcess);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ProcessModelTest {
         DeliveryDocument doc = new DeliveryDocument();
         doc.setEcmFolder("someFolder");
         deliveryTask.setDocumentList(asList(doc, doc));
-        List<AbstractProcess> processes = instance.getProcessList(deliveryTask);
-        Assert.assertTrue(processes.get(0) instanceof TfsProcess);
+        List<ProcessDto> processes = instance.getProcessList(deliveryTask);
+        Assert.assertTrue(processes.get(0).getProcess() instanceof TfsProcess);
     }
 }
