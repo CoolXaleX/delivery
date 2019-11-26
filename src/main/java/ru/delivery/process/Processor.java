@@ -1,12 +1,14 @@
 package ru.delivery.process;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.delivery.dto.DeliveryTask;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
+@Component
 public class Processor {
 
     private ProcessModel processModel;
@@ -14,6 +16,11 @@ public class Processor {
     private ProcessDto.TypeProcess currentType;
 
     @Autowired
+    public Processor(ProcessModel processModel) {
+        this.processModel = processModel;
+        this.currentType = ProcessDto.TypeProcess.SYNC;
+    }
+
     public Processor(ProcessModel processModel, ExecutorService executorService, ProcessDto.TypeProcess currentType) {
         this.processModel = processModel;
         this.executorService = executorService;

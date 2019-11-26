@@ -3,16 +3,8 @@ package ru.delivery.dto;
 import java.util.List;
 
 public class MainEntry {
-    private String deliveryGuid;
+    private String processName;
     private List<Document> documents;
-
-    public String getDeliveryGuid() {
-        return deliveryGuid;
-    }
-
-    public void setDeliveryGuid(String deliveryGuid) {
-        this.deliveryGuid = deliveryGuid;
-    }
 
     public List<Document> getDocuments() {
         return documents;
@@ -20,5 +12,13 @@ public class MainEntry {
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+    }
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
     }
 }
