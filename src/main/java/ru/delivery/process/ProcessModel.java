@@ -3,16 +3,20 @@ package ru.delivery.process;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import ru.delivery.dto.DeliveryTask;
 
 import java.util.*;
 
 public class ProcessModel {
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     private static final Logger log = LoggerFactory.getLogger(ProcessModel.class);
 
     private Map<String, List<String>> processRoad = new HashMap<>();
-    private static final String PACKAGE = "ru.delivery.process.";
 
     private Gson gson = new Gson();
 
@@ -35,10 +39,10 @@ public class ProcessModel {
         for(String processJson : processRoad.get(currentRoad)) {
             ProcessDto processDto = convert(processJson);
             if (processDto == null) continue;
-            AbstractProcess process = getClass(processDto.getName(), task);
+            AbstractProcess process = getClass(processDto.getName());
             if (process == null) continue;
             processDto.setProcess(process);
-            if (!process.isSent()) result.add(processDto);
+            if (!process.isSent(task)) result.add(processDto);
         }
         return result;
     }
@@ -52,13 +56,9 @@ public class ProcessModel {
         }
     }
 
-    private AbstractProcess getClass(String className, DeliveryTask task) {
+    private AbstractProcess getClass(String className) {
         try {
-            // TODO нужно вынести в конвертер
-            // TODO наверное надо брать класс из класс лоадера, а не создавать его, т.к. это будут бины
-            return (AbstractProcess)Class.forName(PACKAGE + className)
-                    .getConstructor(DeliveryTask.class)
-                    .newInstance(task);
+            return (AbstractProcess) applicationContext.getBean(className);
         } catch (Exception e) {
             log.error("Cant create class {}", className, e);
             return null;

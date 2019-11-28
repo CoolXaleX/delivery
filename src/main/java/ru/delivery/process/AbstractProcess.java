@@ -4,21 +4,17 @@ import ru.delivery.dto.DeliveryTask;
 
 abstract public class AbstractProcess {
 
-    private boolean isSent;
+    /**
+     * Проверка, была ли уже выполнена данная задача.
+     * @param task - переменные процесса
+     * @return true - задача была выполнена, false иначе
+     */
+    public abstract boolean isSent(DeliveryTask task);
 
-    public AbstractProcess(DeliveryTask task) {
-        this.isSent = isCompletedTask(task);
-    }
-
-    protected abstract boolean isCompletedTask(DeliveryTask task);
-
-    public boolean isSent() {
-        return isSent;
-    }
-
-    public void setSent(boolean sent) {
-        isSent = sent;
-    }
-
+    /**
+     * Выполняет данную задачу.
+     * @param task - переменные процесса
+     * @return Результат выполнения задачи
+     */
     public abstract boolean execute(DeliveryTask task);
 }
