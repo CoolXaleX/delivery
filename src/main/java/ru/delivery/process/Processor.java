@@ -4,9 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.delivery.dto.DeliveryTask;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import static ru.delivery.process.ProcessDto.ExecutionProcessMode.PARALLEL;
+import static ru.delivery.process.ProcessDto.ExecutionProcessMode.SINGLE;
 
 @Component
 public class Processor {
@@ -27,13 +32,29 @@ public class Processor {
         this.currentType = currentType;
     }
 
-    public boolean process(DeliveryTask task) throws ExecutionException, InterruptedException {
+    public boolean process(DeliveryTask task) throws InterruptedException {
         List<ProcessDto> processes = processModel.getProcessList(task);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        List<Future<Boolean>> parallelTask = new ArrayList<>();
+
         for (ProcessDto dto : processes) {
             // Выполняем только те задачи, в каком режиме мы запущены
             if (dto.getType() != currentType) continue;
-            // TODO Придумать механизм параллельного выполнения задач
-            if (!dto.getProcess().execute(task)) return false;
+
+            if (dto.getMode() == SINGLE) {
+                if (!dto.getProcess().execute(task)) return false;
+            } else if (dto.getMode() == PARALLEL) {
+                parallelTask.add(executorService.submit(() -> dto.getProcess().execute(task)));
+            }
+        }
+        if (!parallelTask.isEmpty()) {
+            return parallelTask.stream().allMatch(future -> {
+                try {
+                    return future.get();
+                } catch (Exception e) {
+                    return false;
+                }
+            });
         }
         return true;
     }
