@@ -27,8 +27,8 @@ public class ProcessModel {
         ));
         processRoad.put("oad_v1", Arrays.asList(
                 "{\"name\":\"EcmProcess\", \"type\":\"SYNC\", \"mode\":\"SINGLE\"}",
-                "{\"name\":\"TfsProcess\", \"type\":\"SYNC\", \"mode\":\"SINGLE\"}",
-                "{\"name\":\"OadProcess\", \"type\":\"ASYNC\", \"mode\":\"SINGLE\"}"
+                "{\"name\":\"TfsProcess\", \"type\":\"SYNC\", \"mode\":\"PARALLEL\"}",
+                "{\"name\":\"OadProcess\", \"type\":\"SYNC\", \"mode\":\"PARALLEL\"}"
         ));
     }
 
